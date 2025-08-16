@@ -11,26 +11,20 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 
-  <!-- === SEO de base === -->
-  <!-- Remplace l'URL si tu renommes ton dépôt ou utilises un domaine personnalisé -->
+  <!-- SEO -->
   <link rel="canonical" href="https://massimo399.github.io/-La-Ra-Mass/">
   <meta name="robots" content="index,follow">
-
-  <!-- === Open Graph / Social === -->
   <meta property="og:title" content="À La Ra'Mass — Cours de natation à Charleroi">
   <meta property="og:description" content="À La Ra'Mass — Cours de natation privés pour enfants et adolescents autour de Charleroi (~15 km). Réservation en ligne, créneaux de 30 minutes, 25€ la séance (entrée piscine incluse).">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://massimo399.github.io/-La-Ra-Mass/">
   <meta property="og:site_name" content="À La Ra'Mass">
   <meta property="og:locale" content="fr_BE">
-  <!-- <meta property="og:image" content="https://massimo399.github.io/-La-Ra-Mass/visuel.jpg"> -->
-
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="À La Ra'Mass — Cours de natation à Charleroi">
   <meta name="twitter:description" content="Cours privés pour enfants & ados (~15 km de Charleroi). Réservation en ligne, 25 € la séance.">
-  <!-- <meta name="twitter:image" content="https://massimo399.github.io/-La-Ra-Mass/visuel.jpg"> -->
 
-  <!-- === JSON-LD LocalBusiness === -->
+  <!-- JSON-LD LocalBusiness -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -45,7 +39,6 @@
     "description": "Cours privés de natation pour enfants et adolescents autour de Charleroi. Créneaux de 30 minutes, pédagogie bienveillante, 25 € la séance (entrée piscine incluse)."
   }
   </script>
-  <!-- Si Search Console te donne une balise de vérification, colle-la ici (avant </head>) -->
 
   <style>
     :root{ --blue:#0ea5e9; --blue-dark:#0369a1; --ink:#0b1220; --bg:#f8fafc; --card:#ffffff; --accent:#22d3ee; }
@@ -61,7 +54,7 @@
     .brand .logo{width:40px;height:40px;border-radius:12px;display:grid;place-items:center;background:#e0f2fe;box-shadow:inset 0 0 18px rgba(255,255,255,.35)}
     .brand .logo svg{width:26px;height:26px;fill:#0369a1}
     .brand h1{font-size:1.1rem;margin:0;letter-spacing:.3px}
-    nav ul{list-style:none;display:flex;gap:18px;margin:0;padding:0}
+    nav ul{list-style:none;display:flex;gap:18px;margin:0;padding:0;flex-wrap:wrap}
     nav a{color:white;font-weight:600}
 
     .hero{position:relative;overflow:hidden;background:linear-gradient(180deg,#e0f2fe 0%, #f0fdff 100%)}
@@ -94,11 +87,12 @@
     .note{font-size:.95rem;color:#334155;background:#f1f5f9;border-left:4px solid var(--blue);padding:12px 14px;border-radius:12px}
 
     .planning-controls{display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin-bottom:12px}
-    .tabs{display:flex;gap:8px;flex-wrap:wrap}
-    .tab{border:1px solid #cbd5e1;background:#fff;color:#0b1220;border-radius:12px;padding:8px 12px;cursor:pointer;font-weight:700}
+    .tabs{display:flex;gap:8px;flex-wrap:wrap;overflow-x:auto;padding-bottom:4px}
+    .tabs::-webkit-scrollbar{height:6px}
+    .tab{border:1px solid #cbd5e1;background:#fff;color:#0b1220;border-radius:12px;padding:10px 14px;cursor:pointer;font-weight:700;flex:0 0 auto}
     .tab.active{background:var(--blue);color:white;border-color:var(--blue)}
-    .slots{display:grid;grid-template-columns:repeat(auto-fill,minmax(165px,1fr));gap:10px}
-    .slot{padding:10px;border:1px solid #e2e8f0;border-radius:12px;background:#fff;text-align:center;cursor:pointer;font-weight:700}
+    .slots{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px}
+    .slot{padding:12px;border:1px solid #e2e8f0;border-radius:12px;background:#fff;text-align:center;cursor:pointer;font-weight:700}
     .slot small{display:block;font-weight:600;color:#475569}
     .slot:hover{border-color:var(--blue)}
     .slot.booked{opacity:.5;cursor:not-allowed;text-decoration:line-through}
@@ -120,13 +114,28 @@
     footer{padding:32px 0;background:#0b1220;color:#e2e8f0;position:relative;z-index:2}
     footer a{color:#7dd3fc}
 
-    @media (max-width: 900px){ .hero .inner{grid-template-columns:1fr} .grid-2{grid-template-columns:1fr} .pricing{grid-template-columns:1fr} .form .row{grid-template-columns:1fr} }
-  
-    /* WhatsApp contact badge */
+    /* Bouton image WhatsApp (section Contact) */
     .wa-link{display:inline-flex;align-items:center;gap:10px;margin-top:8px}
     .wa-badge{width:48px;height:48px;border-radius:50%;display:inline-flex;justify-content:center;align-items:center;background:#25D366;box-shadow:0 6px 16px rgba(37,211,102,.35)}
     .wa-badge svg{width:26px;height:26px;fill:white}
 
+    /* Bulle WhatsApp flottante (mobile + desktop) */
+    .wa-float{position:fixed;right:16px;bottom:16px;width:56px;height:56px;border-radius:50%;background:#25D366;display:flex;align-items:center;justify-content:center;box-shadow:0 12px 26px rgba(37,211,102,.45);z-index:9999;transition:transform .15s ease, box-shadow .15s ease}
+    .wa-float:hover{transform:scale(1.05);box-shadow:0 14px 30px rgba(37,211,102,.55)}
+    .wa-float svg{width:28px;height:28px;fill:white}
+
+    /* Responsif smartphone */
+    @media (max-width: 900px){
+      .hero .inner{grid-template-columns:1fr;padding:32px 0}
+      .hero h2{font-size:1.7rem}
+      .hero-art{height:200px}
+      .btn{width:100%;justify-content:center}
+      .grid-2{grid-template-columns:1fr}
+      .pricing{grid-template-columns:1fr}
+      .form .row{grid-template-columns:1fr}
+      .slots{grid-template-columns:repeat(auto-fill,minmax(135px,1fr))}
+      body{padding-bottom:80px} /* espace pour la bulle flottante */
+    }
   </style>
 </head>
 <body>
@@ -164,7 +173,6 @@
         </div>
       </div>
       <div class="hero-art" aria-hidden="true">
-        <!-- Illustration nageur (en haut à droite) -->
         <svg viewBox="0 0 512 512" role="img" aria-label="Illustration nageur" xmlns="http://www.w3.org/2000/svg">
           <path fill="#e0f2fe" d="M0 400c40-20 80-20 120 0s80 20 120 0 80-20 120 0 80 20 120 0v64H0z"/>
           <circle cx="210" cy="120" r="26" fill="#fef3c7"/>
@@ -301,7 +309,15 @@
       <div class="card">
         <h3 class="h">Contact</h3>
         <p>Email : <a href="mailto:pasetti.massimo@hotmail.com">pasetti.massimo@hotmail.com</a><br> Téléphone : <a href="tel:+32479879446">+32 479 87 94 46</a></p>
-        <p class="small">Interventions dans les <strong>piscines de votre choix</strong> autour de <strong>Charleroi</strong> (~15 km&nbsp;: Farciennes, Châtelet, Fleurus, Courcelles, Montigny‑le‑Tilleul, Fontaine‑l’Évêque…).</p>
+        <a class="wa-link" href="https://wa.me/32479879446?text=Bonjour%20Massimo%2C%20je%20souhaite%20des%20infos%20pour%20un%20cours%20de%20natation%20(%C3%80%20La%20Ra%27Mass)." target="_blank" rel="noopener" aria-label="Contacter via WhatsApp">
+          <span class="wa-badge" role="img" aria-label="WhatsApp">
+            <svg viewBox="0 0 32 32" aria-hidden="true">
+              <path d="M19.11 17.4c-.28-.14-1.67-.82-1.92-.91-.26-.1-.45-.14-.64.14-.19.28-.74.91-.9 1.1-.17.19-.33.21-.61.07-.28-.14-1.18-.44-2.25-1.41-.83-.74-1.39-1.64-1.55-1.92-.16-.28-.02-.43.12-.57.12-.12.28-.33.42-.5.14-.17.19-.28.28-.47.09-.19.05-.36-.02-.5-.07-.14-.64-1.55-.88-2.12-.23-.56-.47-.48-.64-.49l-.55-.01c-.19 0-.5.07-.76.36-.26.28-.99.97-.99 2.37 0 1.4 1.02 2.75 1.16 2.94.14.19 2 3.06 4.84 4.29.68.29 1.21.46 1.62.59.68.22 1.3.19 1.79.11.55-.08 1.67-.68 1.9-1.34.23-.66.23-1.23.16-1.34-.07-.11-.26-.18-.54-.32zM16.03 3C9.94 3 5 7.94 5 14.03c0 2.44.86 4.69 2.3 6.46L6.02 27l6.64-1.74c1.7.93 3.66 1.46 5.74 1.46 6.09 0 11.03-4.94 11.03-11.03C29.44 7.94 24.12 3 16.03 3zm0 20.06c-1.84 0-3.54-.54-4.97-1.46l-.36-.23-3.94 1.03 1.05-3.83-.25-.4c-1.2-1.66-1.92-3.72-1.92-5.93 0-5.67 4.6-10.27 10.27-10.27 5.67 0 10.27 4.6 10.27 10.27 0 5.66-4.6 10.26-10.27 10.26z"/>
+            </svg>
+          </span>
+          <span style="font-weight:700;color:#065f46">WhatsApp</span>
+        </a>
+        <p class="small" style="margin-top:10px">Interventions dans les <strong>piscines de votre choix</strong> autour de <strong>Charleroi</strong> (~15 km&nbsp;: Farciennes, Châtelet, Fleurus, Courcelles, Montigny‑le‑Tilleul, Fontaine‑l’Évêque…).</p>
       </div>
       <div class="card">
         <h4 class="h">Raccourcis</h4>
@@ -323,12 +339,18 @@
     </div>
   </footer>
 
+  <!-- Bulle WhatsApp flottante -->
+  <a class="wa-float" href="https://wa.me/32479879446?text=Bonjour%20Massimo%2C%20je%20souhaite%20des%20infos%20pour%20un%20cours%20de%20natation%20(%C3%80%20La%20Ra%27Mass)." target="_blank" rel="noopener" aria-label="Contacter via WhatsApp (flottant)">
+    <svg viewBox="0 0 32 32" aria-hidden="true">
+      <path d="M19.11 17.4c-.28-.14-1.67-.82-1.92-.91-.26-.1-.45-.14-.64.14-.19.28-.74.91-.9 1.1-.17.19-.33.21-.61.07-.28-.14-1.18-.44-2.25-1.41-.83-.74-1.39-1.64-1.55-1.92-.16-.28-.02-.43.12-.57.12-.12.28-.33.42-.5.14-.17.19-.28.28-.47.09-.19.05-.36-.02-.5-.07-.14-.64-1.55-.88-2.12-.23-.56-.47-.48-.64-.49l-.55-.01c-.19 0-.5.07-.76.36-.26.28-.99.97-.99 2.37 0 1.4 1.02 2.75 1.16 2.94.14.19 2 3.06 4.84 4.29.68.29 1.21.46 1.62.59.68.22 1.3.19 1.79.11.55-.08 1.67-.68 1.9-1.34.23-.66.23-1.23.16-1.34-.07-.11-.26-.18-.54-.32zM16.03 3C9.94 3 5 7.94 5 14.03c0 2.44.86 4.69 2.3 6.46L6.02 27l6.64-1.74c1.7.93 3.66 1.46 5.74 1.46 6.09 0 11.03-4.94 11.03-11.03C29.44 7.94 24.12 3 16.03 3zm0 20.06c-1.84 0-3.54-.54-4.97-1.46l-.36-.23-3.94 1.03 1.05-3.83-.25-.4c-1.2-1.66-1.92-3.72-1.92-5.93 0-5.67 4.6-10.27 10.27-10.27 5.67 0 10.27 4.6 10.27 10.27 0 5.66-4.6 10.26-10.27 10.26z"/>
+    </svg>
+  </a>
+
   <script>
     const fmt2 = n => n.toString().padStart(2,'0');
     const dayNames = ["Dimanche","Lundi","Mardi","Mercredi","Jeudi","Vendredi","Samedi"];
     const dayNamesShort = ["Dim","Lun","Mar","Mer","Jeu","Ven","Sam"];
 
-    // Horaires (0=Dim .. 6=Sam). Certaines piscines ont 2 périodes (scolaire / congés).
     const POOLS = {
       helios: { name: 'Piscine Hélios — Gilly (Charleroi)', stable:false, notice:'Horaires susceptibles de varier — vérifiez le site officiel.', hours: {
         1:[['07:00','18:30']], 2:[['07:00','18:30']], 3:[['07:00','18:30']], 4:[['07:00','18:30']], 5:[['07:00','18:30']], 6:[['10:00','14:00'],['14:30','18:30']], 0:[['08:30','13:00']]
@@ -339,10 +361,10 @@
       fleurus: { name: 'Piscine communale — Fleurus', stable:false, notice:'Horaires susceptibles de varier — vérifiez le site officiel.', hours: {
         1:[['07:00','08:30'],['11:45','13:15'],['15:30','19:15']], 2:[['07:00','09:00'],['11:45','13:15'],['15:30','19:40']], 3:[['07:00','09:00'],['12:00','19:40']], 4:[['07:00','08:30'],['11:45','13:15'],['15:30','19:15']], 5:[['07:00','08:30'],['11:45','13:15'],['15:30','19:15']], 6:[['10:00','18:40']], 0:[['08:00','12:40']]
       }},
-      fontaine: { name: 'Piscine — Fontaine‑l\'Évêque', stable:true, periods: {
+      fontaine: { name: 'Piscine — Fontaine‑l\\'Évêque', stable:true, periods: {
         scolaire: { hours: {1:[['15:15','16:30']],2:[['15:15','18:45']],3:[['15:15','18:45']],4:[['15:15','18:45']],5:[['15:15','20:45']],6:[['14:00','18:45']],0:[['09:00','15:30']] } },
         conges:   { hours: {1:[['13:00','18:45']],2:[['13:00','18:45']],3:[['13:00','18:45']],4:[['13:00','18:45']],5:[['13:00','20:45']],6:[['13:00','18:45']],0:[['09:00','12:30']] } }
-      }, notice:'Horaires confirmés. Vérifiez les annonces municipales en cas d\'exception.'},
+      }, notice:'Horaires confirmés. Vérifiez les annonces municipales en cas d\\'exception.'},
       courcelles: { name: 'Piscine Hissého — Courcelles', stable:true, periods: {
         scolaire: { hours: {1:[['11:45','13:30'],['15:30','19:00']],2:[['07:00','08:30'],['11:45','13:30'],['15:30','19:00']],3:[['11:45','20:00']],4:[['07:00','08:30'],['11:45','13:30'],['15:30','19:00']],5:[['07:00','08:30'],['11:45','13:30'],['15:30','19:00']],6:[['10:00','13:00'],['14:00','17:30']],0:[['08:30','12:30']] } },
         conges: { hours: {1:[['10:00','13:00'],['14:00','19:00']],2:[['10:00','13:00'],['14:00','19:00']],3:[['10:00','13:00'],['14:00','20:00']],4:[['10:00','13:00'],['14:00','19:00']],5:[['10:00','13:00'],['14:00','19:00']],6:[['10:00','13:00'],['14:00','17:30']],0:[['08:30','12:30']] } }
@@ -381,7 +403,6 @@
 
       periodWrap.style.display = pool.periods ? 'flex' : 'none';
 
-      // Notices
       if(pool.notice){
         const info = document.createElement('div'); info.className='note'; info.textContent = pool.notice; slotsEl.appendChild(info);
       }
@@ -404,16 +425,13 @@
         let cursor = new Date(baseDate.getFullYear(), baseDate.getMonth(), baseDate.getDate(), sh, sm);
         let endDate = new Date(baseDate.getFullYear(), baseDate.getMonth(), baseDate.getDate(), eh, em);
 
-        // Hissého: sortie de l'eau 15 min avant la fermeture
         if(currentPool==='courcelles'){
           endDate = new Date(endDate.getTime() - 15*60000);
         }
-        // Option "étendre le soir", mais jamais au-delà de 20:30
         if(extendWeek.checked){
           endDate.setHours(Math.min(endDate.getHours(),20), Math.min(endDate.getMinutes(),30));
         }
 
-        // Masquer toutes les plages avant 15:00 en semaine (lundi→vendredi). Week‑end autorisé.
         const isWeekend = (weekdayIndex === 6 || weekdayIndex === 0); // 6=Sam, 0=Dim
         if(!isWeekend){
           const minStart = new Date(baseDate.getFullYear(), baseDate.getMonth(), baseDate.getDate(), 15, 0);
@@ -442,7 +460,6 @@
 
       intervals.forEach(([s,e])=> addRange(s,e));
 
-      // Bloquer les créneaux déjà passés si on regarde "aujourd'hui"
       if(delta===0){
         Array.from(slotsEl.children).forEach(ch=>{
           const st = new Date(ch.dataset?.isoStart||0);
@@ -451,7 +468,6 @@
       }
     }
 
-    // Sélecteurs et champs
     const poolField = document.getElementById('pool');
     const poolSelect = document.getElementById('poolSelect');
     if(poolSelect){
@@ -512,20 +528,7 @@
 
       const d = new Date(data.start); const de = new Date(data.end);
       const subject = encodeURIComponent(`Demande de confirmation — ${fmt2(d.getDate())}/${fmt2(d.getMonth()+1)} ${fmt2(d.getHours())}h${fmt2(d.getMinutes())}`);
-      const body = encodeURIComponent(`Bonjour Massimo,
-
-Je viens de réserver un créneau via le site.
-
-Nom: ${data.name}
-Téléphone: ${data.phone}
-Email: ${data.email}
-Piscine souhaitée: ${data.pool}
-Créneau: ${dayNames[d.getDay()]} ${fmt2(d.getDate())}/${fmt2(d.getMonth()+1)}/${d.getFullYear()} de ${fmt2(d.getHours())}h${fmt2(d.getMinutes())} à ${fmt2(de.getHours())}h${fmt2(de.getMinutes())}
-Remarques: ${data.notes || '-'}
-
-* J'ai bien pris note d'arriver 10 minutes à l'avance.
-
-Pouvez-vous me confirmer la disponibilité ? Merci !`);
+      const body = encodeURIComponent(`Bonjour Massimo,\n\nJe viens de réserver un créneau via le site.\n\nNom: ${data.name}\nTéléphone: ${data.phone}\nEmail: ${data.email}\nPiscine souhaitée: ${data.pool}\nCréneau: ${dayNames[d.getDay()]} ${fmt2(d.getDate())}/${fmt2(d.getMonth()+1)}/${d.getFullYear()} de ${fmt2(d.getHours())}h${fmt2(d.getMinutes())} à ${fmt2(de.getHours())}h${fmt2(de.getMinutes())}\nRemarques: ${data.notes || '-'}\n\n* J'ai bien pris note d'arriver 10 minutes à l'avance.\n\nPouvez-vous me confirmer la disponibilité ? Merci !`);
       mailtoLink.href = `mailto:pasetti.massimo@hotmail.com?subject=${subject}&body=${body}`;
       mailtoLink.removeAttribute('aria-disabled');
     });
@@ -566,13 +569,12 @@ END:VCALENDAR`;
       setTimeout(()=>URL.revokeObjectURL(url), 5000);
     });
 
-    // Paiement Stripe (mode test : lien fourni)
     const PAYMENT_LINK = 'https://buy.stripe.com/test_00w4gB9YfbBl6j26evaEE00';
     const DEMO_MODE = false;
     document.getElementById('payNow').addEventListener('click', ()=>{
       const bookings = loadBookings();
       const id = chosenSlotInput.dataset.slotId; const data = bookings[id];
-      if(!data){ alert('Enregistrez d\'abord la réservation.'); return; }
+      if(!data){ alert('Enregistrez d\\'abord la réservation.'); return; }
       if(PAYMENT_LINK){
         const params = new URLSearchParams({ref:id,name:data.name,pool:data.pool,start:data.start,end:data.end,amount:'25.00'});
         window.location.href = `${PAYMENT_LINK}?${params.toString()}`;
@@ -581,7 +583,6 @@ END:VCALENDAR`;
       } else { alert('Paiement non configuré.'); }
     });
 
-    // Navigation jours
     const tabsEls = document.querySelectorAll('.tab');
     tabsEls.forEach(t => t.addEventListener('click', ()=>{
       if(!t.dataset.day) return;
@@ -594,14 +595,10 @@ END:VCALENDAR`;
       buildSlots(parseInt(active.dataset.day,10));
     });
 
-    // Footer: année courante
     document.getElementById('year').textContent = new Date().getFullYear();
-
-    // Init
-    if(document.getElementById('pool')){ document.getElementById('pool').value = POOLS.currentPool?.name || POOLS['helios'].name; }
+    if(document.getElementById('pool')){ document.getElementById('pool').value = POOLS['helios'].name; }
     buildSlots(1);
 
-    // Effet bulles
     (function makeBubbles(){
       const root = document.getElementById('aquarium'); if(!root) return;
       const N = 28;
