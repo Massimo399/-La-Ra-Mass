@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>À La Ra'Mass — Cours de natation à Charleroi</title>
+  <meta name="description" content="Leçons privées de natation (30 min) pour enfants & ados autour de Charleroi. Réservation via WhatsApp et paiement Stripe sécurisé." />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{ --blue:#0ea5e9; --blue-600:#0369a1; --ink:#0f172a; --bg:#eaf6ff; --card:#fff; --border:#e2e8f0; --accent:#22d3ee; --red:#ef4444; }
+    *{box-sizing:border-box} html,body{margin:0;color:var(--ink);font-family:Poppins,system-ui,Arial,sans-serif;background:var(--bg)}
+    .container{max-width:1100px;margin:0 auto;padding:0 20px}
+    header{position:fixed;top:0;left:0;right:0;z-index:1000;background:linear-gradient(90deg,#38bdf8,#0ea5e9);color:#fff;box-shadow:0 6px 16px rgba(2,6,23,.08)}
+    .nav{display:flex;align-items:center;justify-content:space-between;height:68px}
+    .brand{display:flex;align-items:center;gap:10px}
+    .logo{width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,.2);display:grid;place-items:center}
+    .logo svg{width:24px;height:24px;fill:#fff} header h1{margin:0;font-size:1.2rem;font-weight:700}
+    nav ul{display:flex;gap:16px;list-style:none;margin:0;padding:0} nav a{color:#fff;font-weight:600;opacity:.95}
+    main{padding-top:96px} section{padding:56px 0} h2,h3{color:#075985;margin:0 0 12px}
+    .hero .inner{display:grid;grid-template-columns:1.2fr .8fr;gap:24px;align-items:center}
+    .pill{display:inline-block;background:#e0f2fe;border:1px solid #bae6fd;color:#075985;border-radius:999px;padding:6px 12px;font-size:.9rem;font-weight:600}
+    .btn{display:inline-flex;align-items:center;gap:8px;background:var(--blue);color:#fff;padding:10px 14px;border-radius:12px;font-weight:700;border:0;cursor:pointer}
+    .btn:hover{background:var(--blue-600)} .btn-outline{background:#fff;color:var(--blue);border:2px solid var(--blue)}
+    .card{background:var(--card);border:1px solid var(--border);border-radius:18px;padding:18px;box-shadow:0 8px 24px rgba(2,6,23,.05);margin-bottom:18px}
+    .row{display:flex;gap:12px;flex-wrap:wrap} label{display:flex;flex-direction:column;gap:6px}
+    input,select,textarea{border:1px solid #cbd5e1;border-radius:12px;padding:10px 12px;background:#fff;font:inherit}
+    .controls{display:flex;gap:12px;flex-wrap:wrap;align-items:end;margin:8px 0}
+    .daybar{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0} .daybtn{padding:8px 12px;border:1px solid #cbd5e1;background:#fff;border-radius:999px;cursor:pointer}
+    .daybtn.active{background:#e0f2fe;border-color:#7dd3fc}
+    .slots{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0}
+    .slot{padding:8px 12px;border:1.5px dashed #94a3b8;border-radius:12px;background:#fff;cursor:pointer}
+    .slot.selected{outline:3px solid var(--accent)}
+    .slot.booked{background:#fee2e2;border-color:#f87171;color:#b91c1c;cursor:not-allowed;text-decoration:line-through}
+    .aquarium{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.5}
+    .bubble-fx{position:absolute;bottom:-80px;border-radius:50%;width:var(--s);height:var(--s);left:var(--x);
+      background:radial-gradient(circle at 30% 30%, rgba(255,255,255,.95), rgba(255,255,255,.55));
+      box-shadow:0 8px 20px rgba(255,255,255,.45);filter:blur(.2px);
+      animation:rise var(--dur) linear infinite, drift calc(var(--dur)*0.8) ease-in-out infinite;opacity:.95}
+    @keyframes rise{to{transform:translateY(-125vh)}} @keyframes drift{50%{transform:translateY(-62vh) translateX(var(--dx))}}
+    footer{background:#0b1220;color:#e2e8f0;text-align:center;padding:24px;margin-top:16px}
+    @media (max-width: 900px){.hero .inner{grid-template-columns:1fr}.btn{width:100%;justify-content:center}}
+  </style>
+</head>
+<body>
+  <div class="aquarium" aria-hidden="true" id="aquarium"></div>
+  <header>
+    <div class="container nav">
+      <div class="brand">
+        <div class="logo" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M7.5 5.75a1.75 1.75 0 1 1 3.5 0 1.75 1.75 0 0 1-3.5 0zm8.75 5.25-3.3-1.9a2.5 2.5 0 0 0-2.46.04l-2.97 1.8a.75.75 0 0 0 .78 1.29l2.94-1.78c.4-.24.9-.25 1.31-.02l2.45 1.41-3.67 2.13a2.5 2.5 0 0 1-2.47 0l-2.3-1.33a.75.75 0 1 0-.74 1.3l2.3 1.33a4 4 0 0 0 3.95 0l4.98-2.89.77.44a3.5 3.5 0 0 0 3.5 0 .75.75 0 0 0-.75-1.3 2 2 0 0 1-2 0l-1.89-1.1zM3 18.25c.7.44 1.55.75 2.5.75s1.8-.31 2.5-.75c.7.44 1.55.75 2.5.75s1.8-.31 2.5-.75c.7.44 1.55.75 2.5.75s1.8-.31 2.5-.75c.7.44 1.55.75 2.5.75a.75.75 0 0 0 0-1.5c-.95 0-1.8-.31-2.5-.75-.7.44-1.55.75-2.5.75s-1.8-.31-2.5-.75c-.7.44-1.55.75-2.5.75s-1.8-.31-2.5-.75c-.7.44-1.55.75-2.5.75s-1.8-.31-2.5-.75a.75.75 0 1 0 0 1.5z"/></svg>
+        </div>
+        <h1>À La Ra'Mass</h1>
+      </div>
+      <nav>
+        <ul>
+          <li><a href="#accueil">Accueil</a></li>
+          <li><a href="#presentation">Présentation</a></li>
+          <li><a href="#planning">Planning & Réservation</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="accueil" class="hero">
+    <div class="container inner">
+      <div>
+        <span class="pill">Natation • Charleroi et alentours (~15 km)</span>
+        <h2 style="margin:10px 0 8px">Perfectionnez la technique de vos enfants en toute confiance</h2>
+        <p>Leçons privées de 30 minutes — pédagogie positive, progression mesurable, bonne humeur garantie.</p>
+        <div class="row" style="margin-top:12px">
+          <a class="btn" href="#planning">Réserver un créneau</a>
+          <a class="btn btn-outline" href="#presentation">Rencontrer Massimo</a>
+        </div>
+      </div>
+      <div aria-hidden="true" style="height:240px;background:linear-gradient(135deg,#e0f2fe,#cffafe);border:1px solid #bae6fd;border-radius:18px;display:grid;place-items:center;box-shadow:0 8px 24px rgba(2,6,23,.06)">
+        <svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Illustration nageur">
+          <path fill="#e0f2fe" d="M0 400c40-20 80-20 120 0s80 20 120 0 80-20 120 0 80 20 120 0v64H0z"/>
+          <circle cx="210" cy="120" r="26" fill="#fef3c7"/>
+          <path fill="#f0f9ff" d="M120 200l80-40 80 48 48 16-48 24-64-16-64 24z"/>
+          <path fill="#bae6fd" d="M64 320c40-24 80-24 120 0s80 24 120 0 80-24 120 0" stroke="#7dd3fc" stroke-width="12" fill="none"/>
+        </svg>
+      </div>
+    </div>
+  </main>
+
+  <section id="presentation">
+    <div class="container">
+      <div class="card">
+        <h3>Massimo — Coach de natation</h3>
+        <p>Études dans le sport, animateur. J’accorde une grande importance à l’écoute, à la bienveillance et à la bonne humeur pour créer un cadre motivant et sécurisant.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="planning">
+    <div class="container">
+      <h2>Planning & Réservation</h2>
+      <div class="card">
+        <p class="hint" style="margin:0 0 10px">
+          Choisissez une <strong>piscine</strong>, la <strong>période</strong>, un <strong>créneau</strong> (30 min), renseignez les infos élève, puis payez via Stripe. Vous recevrez une confirmation automatique.
+        </p>
+
+        <!-- Contrôles -->
+        <div class="controls">
+          <label style="flex:1 1 320px">Piscine
+            <select id="pool">
+              <option value="helios">Piscine Hélios — Gilly (Charleroi)</option>
+              <option value="sirena">Siréna — Châtelet/Farciennes</option>
+              <option value="fleurus">Piscine communale — Fleurus</option>
+              <option value="fontaine">Piscine — Fontaine-l'Évêque</option>
+              <option value="courcelles">Piscine Hissého — Courcelles</option>
+            </select>
+          </label>
+          <label style="flex:0 0 220px">Période
+            <select id="period">
+              <option value="school">Scolaire</option>
+              <option value="holidays">Vacances scolaires</option>
+            </select>
+          </label>
+          <label style="flex:1 1 260px">Créneau choisi
+            <input id="chosen" readonly placeholder="Sélectionnez un créneau" />
+          </label>
+        </div>
+
+        <div id="daybar" class="daybar" role="tablist" aria-label="Jours"></div>
+        <div id="slots" class="slots"></div>
+
+        <!-- Formulaire élève -->
+        <div class="card" style="background:#f8feff;border-style:dashed">
+          <div class="row">
+            <label style="flex:1 1 260px">Nom & prénom de l’élève
+              <input id="name" required placeholder="Ex. Léo Martin">
+            </label>
+            <label style="flex:1 1 160px">Âge
+              <input id="age" type="number" min="3" max="99" placeholder="Ex. 8">
+            </label>
+            <label style="flex:1 1 220px">Niveau
+              <select id="level">
+                <option value="">Sélectionner…</option>
+                <option>Débutant</option>
+                <option>Intermédiaire</option>
+                <option>Avancé</option>
+              </select>
+            </label>
+          </div>
+          <div class="row">
+            <label style="flex:1 1 100%">Objectifs / points à améliorer
+              <textarea id="goals" rows="3" placeholder="Ex. respiration, battements, crawl, aisance dans l’eau…"></textarea>
+            </label>
+          </div>
+
+          <div class="row" style="align-items:center;justify-content:flex-end">
+            <button id="payLink" class="btn" type="button" disabled>Payer (Stripe)</button>
+          </div>
+          <div id="warn" class="danger" style="margin-top:8px;color:var(--red)"></div>
+          <div id="result" class="card" style="display:none;margin-top:10px;background:#ecfeff;border-color:#7dd3fc">
+            Paiement confirmé ✅ Merci ! Un email de confirmation vous a été envoyé.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="container">
+      <h2>Contact</h2>
+      <div class="card">
+        <p><strong>Email :</strong> <a href="mailto:pasetti.massimo@hotmail.com">pasetti.massimo@hotmail.com</a> — <strong>Tél :</strong> <a href="tel:+32479879446">+32 479 87 94 46</a></p>
+      </div>
+    </div>
+  </section>
+
+  <footer>© <span id="year"></span> À La Ra'Mass — Tous droits réservés</footer>
+
+  <script>
+    /* Bulles boostées */
+    (function(){
+      const root=document.getElementById('aquarium'); if(!root) return;
+      const N=54;
+      for(let i=0;i<N;i++){
+        const b=document.createElement('div'); b.className='bubble-fx';
+        const size=Math.floor(16+Math.random()*56);
+        const x=Math.floor(Math.random()*100)+'%';
+        const dur=(7+Math.random()*14)+'s';
+        const dx=(Math.random()<0.5?-1:1)*Math.floor(Math.random()*120)+'px';
+        b.style.setProperty('--s',size+'px'); b.style.setProperty('--x',x);
+        b.style.setProperty('--dur',dur); b.style.setProperty('--dx',dx);
+        b.style.animationDelay=(Math.random()*8)+'s';
+        root.appendChild(b);
+      }
+    })();
+
+    /* Créneaux (7 jours) + périodes */
+    const daybar = document.getElementById('daybar');
+    const slotsEl = document.getElementById('slots');
+    const chosen = document.getElementById('chosen');
+    const poolSel = document.getElementById('pool');
+    const periodSel = document.getElementById('period');
+    const nameEl = document.getElementById('name');
+    const ageEl = document.getElementById('age');
+    const levelEl = document.getElementById('level');
+    const goalsEl = document.getElementById('goals');
+    const warn = document.getElementById('warn');
+    const payBtn = document.getElementById('payLink');
+    const result = document.getElementById('result');
+    const fmt2 = n => (n<10?'0':'')+n; const dayNames = ['Dim','Lun','Mar','Mer','Jeu','Ven','Sam'];
+
+    const SCHEDULES = {
+      helios: {
+        school: {1:[[420,1110]],2:[[420,1110]],3:[[420,1110]],4:[[420,1110]],5:[[420,1110]],6:[[600,840],[870,1110]],0:[[510,780]]},
+        holidays: {1:[[600,840],[870,1110]],2:[[600,840],[870,1110]],3:[[600,840],[870,1110]],4:[[600,840],[870,1110]],5:[[600,840],[870,1110]],6:[[600,840],[870,1110]],0:[[510,780]]}
+      },
+      sirena: {
+        school: {
+          1:[[720,810],[960,1170]], 2:[[420,510],[720,810],[960,1290]], 3:[[720,1170]],
+          4:[[720,810],[960,1170]], 5:[[720,810],[960,1290]], 6:[[630,780],[840,1080]], 0:[[540,810]]
+        },
+        holidays: 'default'
+      },
+      fleurus: {
+        school: {
+          1:[[420,510],[705,795],[930,1155]], 2:[[420,540],[705,795],[930,1180]],
+          3:[[420,540],[720,1180]], 4:[[420,510],[705,795],[930,1155]],
+          5:[[420,510],[705,795],[930,1155]], 6:[[600,1120]], 0:[[480,760]]
+        },
+        holidays: 'default'
+      },
+      fontaine: 'default', courcelles: 'default'
+    };
+    function defaultFor(dayIdx){ const isWE=(dayIdx===0||dayIdx===6); return isWE?[[540,1080]]:[[900,1200]]; }
+    function rangesFor(poolKey, dayIdx, period){ const sch=SCHEDULES[poolKey]; if(!sch||sch==='default') return defaultFor(dayIdx); const table=sch[period]||sch.school; return table[dayIdx]||[]; }
+
+    function buildDaybar(){
+      daybar.innerHTML=''; const today=new Date();
+      for(let i=0;i<7;i++){
+        const d=new Date(today.getFullYear(),today.getMonth(),today.getDate()+i);
+        const b=document.createElement('button'); b.type='button'; b.className='daybtn'+(i===0?' active':''); b.dataset.offset=i;
+        b.textContent=`${dayNames[d.getDay()]} ${fmt2(d.getDate())}/${fmt2(d.getMonth()+1)}`;
+        b.addEventListener('click',()=>{ document.querySelectorAll('.daybtn').forEach(x=>x.classList.remove('active')); b.classList.add('active'); buildSlots(i); });
+        daybar.appendChild(b);
+      }
+    }
+
+    function buildSlots(offset){
+      slotsEl.innerHTML=''; const now=new Date(); const base=new Date();
+      const day=new Date(base.getFullYear(),base.getMonth(),base.getDate()+offset);
+      const ranges=rangesFor(poolSel.value, day.getDay(), periodSel.value);
+      const endToDate=(d,endMin)=>new Date(d.getFullYear(),d.getMonth(),d.getDate(),Math.floor(endMin/60),endMin%60);
+      const addRange=(startMin,endMin)=>{
+        for(let t=startMin; t<endMin; t+=30){
+          const HH=Math.floor(t/60), MM=t%60;
+          const startDt=new Date(day.getFullYear(),day.getMonth(),day.getDate(),HH,MM);
+          const nextDt=new Date(startDt.getTime()+30*60000);
+          if(nextDt> endToDate(day,endMin)) break;
+          const btn=document.createElement('button'); btn.type='button'; btn.className='slot'; btn.textContent=`${fmt2(HH)}:${fmt2(MM)}`;
+          if(startDt<now){ btn.classList.add('booked'); btn.disabled=true; btn.title='Créneau dépassé'; }
+          else{
+            btn.addEventListener('click', ()=>{
+              document.querySelectorAll('.slot').forEach(x=>x.classList.remove('selected'));
+              btn.classList.add('selected');
+              chosen.value=`${fmt2(day.getDate())}/${fmt2(day.getMonth()+1)}/${day.getFullYear()} • ${fmt2(HH)}:${fmt2(MM)}`;
+              validate();
+            });
+          }
+          slotsEl.appendChild(btn);
+        }
+      };
+      ranges.forEach(([s,e])=> addRange(s,e));
+      if(!slotsEl.children.length){ const p=document.createElement('div'); p.style.padding='6px 0'; p.textContent="Aucun créneau public ce jour — essayez un autre jour/piscine/période."; slotsEl.appendChild(p); }
+    }
+
+    function validate(){
+      warn.style.display='none';
+      const ok = poolSel.value && periodSel.value && chosen.value && nameEl.value.trim() && ageEl.value && levelEl.value;
+      payBtn.disabled = !ok;
+      return ok;
+    }
+
+    /* ===== Stripe Checkout via Apps Script ===== */
+    const EXEC_URL = 'https://script.google.com/macros/s/TON_DEPLOY_ID/exec'; // <-- À REMPLACER (Web app /exec)
+    const SUCCESS_URL_BASE = 'https://<ton-site-ou-pages-github>';          // <-- À REMPLACER (URL de ton site)
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    [poolSel, periodSel, nameEl, ageEl, levelEl, goalsEl].forEach(el=> el.addEventListener('input', validate));
+    chosen.addEventListener('input', validate);
+
+    payBtn.addEventListener('click', async ()=>{
+      if(!validate()) return;
+      const [dpart,tpart] = chosen.value.split(' • ');
+      const [dd,mm,yyyy] = dpart.split('/').map(n=>parseInt(n,10));
+      const [HH,MM] = tpart.split(':').map(n=>parseInt(n,10));
+      const iso = new Date(yyyy,mm-1,dd,HH,MM).toISOString();
+
+      const payload = {
+        action:'create_checkout',
+        name: nameEl.value.trim(),
+        email: '', // si tu ajoutes un champ email, remplis-le ici
+        pool: poolSel.selectedOptions[0].textContent,
+        period: (periodSel.value==='school'?'Scolaire':'Vacances'),
+        slot_human: chosen.value,
+        slot_iso: iso,
+        success_base: SUCCESS_URL_BASE
+      };
+
+      try{
+        const res = await fetch(EXEC_URL, {
+          method:'POST',
+          headers:{'Content-Type':'text/plain;charset=utf-8'}, // évite la préflight CORS
+          body: JSON.stringify(payload)
+        });
+        const j = await res.json();
+        if(!j.ok) throw new Error(j.error||'Erreur serveur');
+        window.location.href = j.url; // redirection vers Stripe
+      }catch(e){
+        warn.textContent = 'Erreur create_checkout : ' + e.message;
+        warn.style.display = 'block';
+      }
+    });
+
+    // Retour de Stripe ?success=1&session_id=...
+    (async function onStripeReturn(){
+      const p = new URLSearchParams(location.search);
+      if(p.get('success')==='1' && p.get('session_id')){
+        try{
+          const res = await fetch(EXEC_URL, {
+            method:'POST',
+            headers:{'Content-Type':'text/plain;charset=utf-8'},
+            body: JSON.stringify({action:'verify_session', session_id: p.get('session_id')})
+          });
+          const j = await res.json();
+          if(j.ok && j.paid){
+            result.style.display='block';
+          }else{
+            warn.textContent = 'Paiement non confirmé ('+(j.status||'inconnu')+').';
+            warn.style.display = 'block';
+          }
+        }catch(e){
+          warn.textContent = 'Erreur verify_session : ' + e.message;
+          warn.style.display = 'block';
+        }
+      }
+    })();
+
+    // Init UI
+    (function init(){ buildDaybar(); buildSlots(0); validate(); })();
+  </script>
+</body>
+</html>
